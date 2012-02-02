@@ -1,0 +1,18 @@
+--- flann-1.7.1-src/src/python/CMakeLists.txt.orig	2011-12-23 12:16:09.000000000 +0100
++++ flann-1.7.1-src/src/python/CMakeLists.txt	2012-02-02 17:07:06.212529926 +0100
+@@ -1,12 +1,12 @@
+ configure_file( setup.py.tpl setup.py )
+ 
+-install( DIRECTORY pyflann DESTINATION share/flann/python )
+-install( FILES ${CMAKE_CURRENT_BINARY_DIR}/setup.py DESTINATION share/flann/python )
++#install( DIRECTORY pyflann DESTINATION share/flann/python )
++#install( FILES ${CMAKE_CURRENT_BINARY_DIR}/setup.py DESTINATION share/flann/python )
+ 
+ 
+ # python instalation
+ if (PYTHON_EXECUTABLE)
+     install(CODE "execute_process(
+-        COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/setup.py install
++        COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/setup.py install --optimize=2 --root=\$ENV{DESTDIR}
+         WORKING_DIRECTORY \"${CMAKE_CURRENT_SOURCE_DIR}\")")
+ endif()
