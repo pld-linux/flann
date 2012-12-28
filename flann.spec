@@ -14,6 +14,7 @@ Group:		Libraries
 Source0:	http://people.cs.ubc.ca/~mariusm/uploads/FLANN/%{name}-%{version}-src.zip
 # Source0-md5:	a5676ca98f860a5b43d0d3a7d8a62903
 Patch0:		%{name}-python.patch
+Patch1:		%{name}-lib.patch
 URL:		http://www.cs.ubc.ca/~mariusm/index.php/FLANN/FLANN
 BuildRequires:	cmake >= 2.6
 %{?with_gomp:BuildRequires:	gcc-c++ >= 6:4.2}
@@ -106,6 +107,7 @@ Dowiązania Pythona do biblioteki FLANN.
 %prep
 %setup -q -n flann-%{version}-src
 %patch0 -p1
+%patch1 -p1
 
 %build
 install -d build
