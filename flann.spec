@@ -1,17 +1,24 @@
-# TODO: CUDA support (on bcond)
+# TODO: CUDA support, MPI (on bconds)
+#
+# Conditional build:
+%bcond_without	gomp	# OpenMP support
+#
 Summary:	FLANN - Fast Library for Approximate Nearest Neighbours
 Summary(pl.UTF-8):	FLANN - szybka biblioteka do przybliżonego wyszukiwania najbliższych sąsiadów
 Name:		flann
-Version:	1.7.1
+Version:	1.8.3
 Release:	1
 License:	BSD
 Group:		Libraries
+#Source0Download: http://www.cs.ubc.ca/~mariusm/index.php/FLANN/FLANN
 Source0:	http://people.cs.ubc.ca/~mariusm/uploads/FLANN/%{name}-%{version}-src.zip
-# Source0-md5:	d780795f523eabda7c7ea09c6f5cf235
+# Source0-md5:	a5676ca98f860a5b43d0d3a7d8a62903
 Patch0:		%{name}-python.patch
 URL:		http://www.cs.ubc.ca/~mariusm/index.php/FLANN/FLANN
 BuildRequires:	cmake >= 2.6
+%{?with_gomp:BuildRequires:	gcc-c++ >= 6:4.2}
 BuildRequires:	hdf5-devel
+%{?with_gomp:BuildRequires:	libgomp-devel}
 BuildRequires:	libstdc++-devel
 BuildRequires:	octave-devel
 BuildRequires:	python >= 1:2.5
@@ -104,7 +111,8 @@ Dowiązania Pythona do biblioteki FLANN.
 install -d build
 cd build
 %cmake .. \
-	-DBUILD_CUDA_LIB=OFF
+	-DBUILD_CUDA_LIB=OFF \
+	%{!?with_gomp:-DUSE_OPENMP=OFF}
 
 %{__make}
 
@@ -141,10 +149,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc COPYING README.md
 %attr(755,root,root) %{_libdir}/libflann.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libflann.so.1.7
+%attr(755,root,root) %ghost %{_libdir}/libflann.so.1.8
 %attr(755,root,root) %{_libdir}/libflann_cpp.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libflann_cpp.so.1.7
-%attr(755,root,root) %{_libdir}/libflann_cpp-gd.so
+%attr(755,root,root) %ghost %{_libdir}/libflann_cpp.so.1.8
 
 %files devel
 %defattr(644,root,root,755)
@@ -159,7 +166,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_libdir}/libflann_s.a
 %{_libdir}/libflann_cpp_s.a
-%{_libdir}/libflann_cpp_s-gd.a
 
 %files -n octave-flann
 %defattr(644,root,root,755)
