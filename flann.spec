@@ -6,13 +6,13 @@
 Summary:	FLANN - Fast Library for Approximate Nearest Neighbours
 Summary(pl.UTF-8):	FLANN - szybka biblioteka do przybliżonego wyszukiwania najbliższych sąsiadów
 Name:		flann
-Version:	1.8.3
+Version:	1.8.4
 Release:	1
 License:	BSD
 Group:		Libraries
 #Source0Download: http://www.cs.ubc.ca/~mariusm/index.php/FLANN/FLANN
 Source0:	http://people.cs.ubc.ca/~mariusm/uploads/FLANN/%{name}-%{version}-src.zip
-# Source0-md5:	a5676ca98f860a5b43d0d3a7d8a62903
+# Source0-md5:	a0ecd46be2ee11a68d2a7d9c6b4ce701
 Patch0:		%{name}-python.patch
 Patch1:		%{name}-lib.patch
 URL:		http://www.cs.ubc.ca/~mariusm/index.php/FLANN/FLANN
