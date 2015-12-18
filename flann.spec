@@ -7,7 +7,7 @@ Summary:	FLANN - Fast Library for Approximate Nearest Neighbours
 Summary(pl.UTF-8):	FLANN - szybka biblioteka do przybliżonego wyszukiwania najbliższych sąsiadów
 Name:		flann
 Version:	1.8.4
-Release:	7
+Release:	8
 License:	BSD
 Group:		Libraries
 #Source0Download: http://www.cs.ubc.ca/~mariusm/index.php/FLANN/FLANN
@@ -136,8 +136,7 @@ install -d $RPM_BUILD_ROOT{%{octave_m_dir},%{octave_oct_dir}}
 mv $RPM_BUILD_ROOT%{_datadir}/flann/octave/*.m $RPM_BUILD_ROOT%{octave_m_dir}
 mv $RPM_BUILD_ROOT%{_datadir}/flann/octave/*.mex $RPM_BUILD_ROOT%{octave_oct_dir}
 
-install -d $RPM_BUILD_ROOT%{py_sitedir}/pyflann
-mv $RPM_BUILD_ROOT%{py_sitescriptdir}/pyflann/lib/libflann.so $RPM_BUILD_ROOT%{py_sitedir}/pyflann
+mv $RPM_BUILD_ROOT%{py_sitedir}/pyflann/lib/libflann.so $RPM_BUILD_ROOT%{py_sitedir}/pyflann
 
 %py_postclean
 
@@ -177,6 +176,6 @@ rm -rf $RPM_BUILD_ROOT
 %files -n python-flann
 %defattr(644,root,root,755)
 %dir %{py_sitedir}/pyflann
+%{py_sitedir}/pyflann/*.py[co]
 %attr(755,root,root) %{py_sitedir}/pyflann/libflann.so
-%{py_sitescriptdir}/pyflann
-%{py_sitescriptdir}/flann-%{version}-py*.egg-info
+%{py_sitedir}/flann-%{version}-py*.egg-info
