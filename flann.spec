@@ -1,7 +1,7 @@
 # TODO: CUDA support, MPI (on bconds)
 #
 # Conditional build:
-%bcond_without	gomp	# OpenMP support
+%bcond_without	openmp	# OpenMP support
 #
 Summary:	FLANN - Fast Library for Approximate Nearest Neighbours
 Summary(pl.UTF-8):	FLANN - szybka biblioteka do przybliżonego wyszukiwania najbliższych sąsiadów
@@ -17,10 +17,10 @@ Patch0:		%{name}-python.patch
 Patch1:		%{name}-lib.patch
 URL:		http://www.cs.ubc.ca/~mariusm/index.php/FLANN/FLANN
 BuildRequires:	cmake >= 2.6
-%{?with_gomp:BuildRequires:	gcc-c++ >= 6:4.2}
+%{?with_openmp:BuildRequires:	gcc-c++ >= 6:4.2}
 BuildRequires:	gtest-devel
 BuildRequires:	hdf5-devel
-%{?with_gomp:BuildRequires:	libgomp-devel}
+%{?with_openmp:BuildRequires:	libgomp-devel}
 BuildRequires:	libstdc++-devel
 BuildRequires:	octave-devel
 BuildRequires:	python >= 1:2.5
@@ -114,7 +114,7 @@ install -d build
 cd build
 %cmake .. \
 	-DBUILD_CUDA_LIB=OFF \
-	%{!?with_gomp:-DUSE_OPENMP=OFF}
+	%{!?with_openmp:-DUSE_OPENMP=OFF}
 
 %{__make}
 
