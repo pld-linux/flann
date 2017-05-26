@@ -29,6 +29,7 @@ BuildRequires:	texlive-format-pdflatex
 BuildRequires:	texlive-latex
 BuildRequires:	texlive-latex-bibtex
 BuildRequires:	texlive-makeindex
+BuildRequires:	texlive-xetex
 BuildRequires:	unzip
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
