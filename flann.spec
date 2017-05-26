@@ -21,6 +21,7 @@ BuildRequires:	hdf5-devel
 BuildRequires:	latex2html
 %{?with_openmp:BuildRequires:	libgomp-devel}
 BuildRequires:	libstdc++-devel
+BuildRequires:	octave-devel
 BuildRequires:	python >= 1:2.5
 BuildRequires:	python-devel >= 1:2.5
 BuildRequires:	rpmbuild(macros) >= 1.605
