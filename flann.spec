@@ -7,7 +7,7 @@ Summary:	FLANN - Fast Library for Approximate Nearest Neighbours
 Summary(pl.UTF-8):	FLANN - szybka biblioteka do przybliżonego wyszukiwania najbliższych sąsiadów
 Name:		flann
 Version:	1.9.1
-Release:	1
+Release:	2
 License:	BSD
 Group:		Libraries
 Source0:	https://github.com/mariusmuja/flann/archive/%{version}/%{name}-%{version}.tar.gz
@@ -30,6 +30,9 @@ BuildRequires:	texlive-latex-bibtex
 BuildRequires:	texlive-makeindex
 BuildRequires:	unzip
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define		octave_m_dir	%(octave-config --m-site-dir)
+%define		octave_oct_dir	%(octave-config --oct-site-dir)
 
 %description
 FLANN is a library for performing fast approximate nearest neighbour
@@ -79,6 +82,18 @@ Static FLANN libraries.
 %description static -l pl.UTF-8
 Statyczne biblioteki FLANN.
 
+%package -n octave-flann
+Summary:	Octave binding for FLANN library
+Summary(pl.UTF-8):	Dowiązania języka Octave do biblioteki FLANN
+Group:		Development/Languages
+Requires:	%{name} = %{version}-%{release}
+
+%description -n octave-flann
+Octave binding for FLANN library.
+
+%description -n octave-flann -l pl.UTF-8
+Dowiązania języka Octave do biblioteki FLANN.
+
 %package -n python-flann
 Summary:	Python binding for FLANN library
 Summary(pl.UTF-8):	Dowiązania Pythona do biblioteki FLANN
@@ -99,7 +114,6 @@ Dowiązania Pythona do biblioteki FLANN.
 install -d build
 cd build
 %cmake .. \
-	-DBUILD_MATLAB_BINDINGS:BOOL=OFF \
 	-DBUILD_CUDA_LIB=OFF \
 	%{!?with_openmp:-DUSE_OPENMP=OFF}
 
@@ -118,6 +132,11 @@ cp -p examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 # packaged as %doc
 %{__rm} -r $RPM_BUILD_ROOT%{_docdir}/flann
+
+install -d $RPM_BUILD_ROOT{%{octave_m_dir},%{octave_oct_dir}}
+%{__rm} $RPM_BUILD_ROOT%{_datadir}/flann/octave/test*.m
+%{__mv} $RPM_BUILD_ROOT%{_datadir}/flann/octave/*.m $RPM_BUILD_ROOT%{octave_m_dir}
+%{__mv} $RPM_BUILD_ROOT%{_datadir}/flann/octave/*.mex $RPM_BUILD_ROOT%{octave_oct_dir}
 
 %{__mv} $RPM_BUILD_ROOT%{py_sitedir}/pyflann/lib/libflann.so $RPM_BUILD_ROOT%{py_sitedir}/pyflann
 
@@ -150,6 +169,11 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_libdir}/libflann_s.a
 %{_libdir}/libflann_cpp_s.a
+
+%files -n octave-flann
+%defattr(644,root,root,755)
+%{octave_m_dir}/flann*.m
+%attr(755,root,root) %{octave_oct_dir}/nearest_neighbors.mex
 
 %files -n python-flann
 %defattr(644,root,root,755)
