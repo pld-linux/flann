@@ -14,6 +14,7 @@ Group:		Libraries
 Source0:	https://github.com/flann-lib/flann/archive/%{version}/%{name}-%{version}.tar.gz
 # Source0-md5:	d187585a55676e2b12bbb7ea04d1398f
 Patch0:		%{name}-python.patch
+Patch1:		%{name}-libdir.patch
 URL:		https://github.com/flann-lib/flann
 BuildRequires:	cmake >= 2.6
 %{?with_openmp:BuildRequires:	gcc-c++ >= 6:4.2}
@@ -112,6 +113,7 @@ Dowiązania Pythona do biblioteki FLANN.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 install -d build
