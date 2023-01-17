@@ -6,14 +6,15 @@
 Summary:	FLANN - Fast Library for Approximate Nearest Neighbours
 Summary(pl.UTF-8):	FLANN - szybka biblioteka do przybliżonego wyszukiwania najbliższych sąsiadów
 Name:		flann
-Version:	1.9.1
-Release:	2
+Version:	1.9.2
+Release:	1
 License:	BSD
 Group:		Libraries
-Source0:	https://github.com/mariusmuja/flann/archive/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	73adef1c7bf8e8b978987e7860926ea6
+#Source0Download: https://github.com/flann-lib/flann/tags
+Source0:	https://github.com/flann-lib/flann/archive/%{version}/%{name}-%{version}.tar.gz
+# Source0-md5:	d187585a55676e2b12bbb7ea04d1398f
 Patch0:		%{name}-python.patch
-URL:		http://www.cs.ubc.ca/~mariusm/index.php/FLANN/FLANN
+URL:		https://github.com/flann-lib/flann
 BuildRequires:	cmake >= 2.6
 %{?with_openmp:BuildRequires:	gcc-c++ >= 6:4.2}
 BuildRequires:	gtest-devel
@@ -165,6 +166,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libflann_cpp.so
 %{_includedir}/flann
 %{_pkgconfigdir}/flann.pc
+%{_libdir}/cmake/flann
 %{_examplesdir}/%{name}-%{version}
 
 %files static
