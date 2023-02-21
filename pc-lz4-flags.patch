@@ -1,0 +1,21 @@
+diff -ur flann-1.9.2.orig/cmake/CMakeLists.txt flann-1.9.2/cmake/CMakeLists.txt
+--- flann-1.9.2.orig/cmake/CMakeLists.txt	2021-04-12 09:15:28.000000000 +0200
++++ flann-1.9.2/cmake/CMakeLists.txt	2023-02-21 19:18:14.517326948 +0100
+@@ -1,5 +1,6 @@
+ set(PKG_DESC "Fast Library for Approximate Nearest Neighbors")
+ set(pkg_conf_file ${CMAKE_CURRENT_BINARY_DIR}/flann.pc)
++string(REPLACE ";" " " LZ4_STATIC_LDFLAGS_PC "${LZ4_STATIC_LDFLAGS}")
+ configure_file(flann.pc.in ${pkg_conf_file} @ONLY)
+ install(FILES ${pkg_conf_file}
+     DESTINATION ${FLANN_LIB_INSTALL_DIR}/pkgconfig/ COMPONENT pkgconfig)
+diff -ur flann-1.9.2.orig/cmake/flann.pc.in flann-1.9.2/cmake/flann.pc.in
+--- flann-1.9.2.orig/cmake/flann.pc.in	2021-04-12 09:15:28.000000000 +0200
++++ flann-1.9.2/cmake/flann.pc.in	2023-02-21 19:18:27.807406729 +0100
+@@ -8,6 +8,6 @@
+ Description: @PKG_DESC@
+ Version: @FLANN_VERSION@
+ Requires: @PKG_EXTERNAL_DEPS@
+-Libs: -L${libdir} @LZ4_STATIC_LDFLAGS@ -lflann -lflann_cpp
++Libs: -L${libdir} @LZ4_STATIC_LDFLAGS_PC@ -lflann -lflann_cpp
+ Cflags: -I${includedir}
+ 
