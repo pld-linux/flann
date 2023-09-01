@@ -7,7 +7,7 @@ Summary:	FLANN - Fast Library for Approximate Nearest Neighbours
 Summary(pl.UTF-8):	FLANN - szybka biblioteka do przybliżonego wyszukiwania najbliższych sąsiadów
 Name:		flann
 Version:	1.9.2
-Release:	3
+Release:	4
 License:	BSD
 Group:		Libraries
 #Source0Download: https://github.com/flann-lib/flann/tags
@@ -25,6 +25,7 @@ BuildRequires:	hdf5-devel
 BuildRequires:	latex2html
 %{?with_openmp:BuildRequires:	libgomp-devel}
 BuildRequires:	libstdc++-devel
+BuildRequires:	lz4-devel
 BuildRequires:	octave-devel
 BuildRequires:	python >= 1:2.5
 BuildRequires:	python-devel >= 1:2.5
@@ -69,6 +70,7 @@ Requires:	%{name} = %{version}-%{release}
 Requires:	hdf5-devel
 Requires:	gtest-devel
 Requires:	libstdc++-devel
+Requires:	lz4-devel
 
 %description devel
 Header files for FLANN libraries.
