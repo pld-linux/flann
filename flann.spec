@@ -126,6 +126,7 @@ install -d build
 cd build
 %cmake .. \
 	-DBUILD_CUDA_LIB=OFF \
+	-DPYTHON_EXECUTABLE:PATH=%{__python} \
 	%{!?with_openmp:-DUSE_OPENMP=OFF}
 
 %{__make}
